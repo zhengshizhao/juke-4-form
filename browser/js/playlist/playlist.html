@@ -1,10 +1,9 @@
 <div>
   <h3>{{ playlist.name }}</h3> 
-  <h1>Add to Playlist</h1>
-  <label>song</label>
-   <select ng-model="chosenSong" class="form-control" ng-options="song as song.name for song in songs"> </select>
+  <h4>Add to Playlist</h4>
+   <select name="songChoices" ng-model="chosenSong" class="form-control" ng-options="song as song.name for song in songs"> </select>
    <br>
-   <button ng-click="addSong(chosenSong,playlist._id)" type="submit" class="btn btn-success" ng-disabled="!chosenSong">Add song</button>
+   <button ng-click="addSong(chosenSong, playlist._id)" type="submit" class="btn btn-success" ng-disabled="!chosenSong">Add song</button>
     <table class='table' ng-show="playlist.songs.length">
     <thead>
       <tr>
@@ -22,7 +21,7 @@
           </button>
         </td>
         <td>{{ song.name }}</td>
-        <td><span ng-repeat="artist in song.artists">{{ artist.name }}{{ $last ? '' : ', ' }}</span></td>
+        <td><span ng-repeat="artist in playlist.artists">{{ artist.name }}{{ $last ? '' : ', ' }}</span></td>
         <td>{{ song.genres.join(', ') }}</td>
       </tr>
     </tbody>

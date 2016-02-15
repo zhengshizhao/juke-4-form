@@ -4,6 +4,7 @@ juke.factory('PlaylistFactory', function ($http, $state) {
 
 	var cachedPlaylists = [];
 
+	var cachedSongList = [];
 
 	var PlaylistFactory = {};
 
@@ -32,12 +33,21 @@ juke.factory('PlaylistFactory', function ($http, $state) {
 	}
 
 	PlaylistFactory.addSong = function(song, playlistId){ 
-		return $http.post('/api/playlists/'+ playlistId + '/songs')
+		return $http.post('/api/playlists/'+ playlistId + '/songs', {song:song})
 		.then(function(res){
 			var theSong =  res.data;
-			return res.data;
+			// console.log(theSong)
+			cachedSongList.push(theSong);
+			return theSong;
 		})
+	}
 
+	PlaylistFactory.getSongList = function (playlistId) {
+		return $http.get('/api/playlists/'+ playlistId + '/songs')
+		.then(function (res) {
+			angular.copy(res.data, cachedSongList);
+			return cachedSongList
+		})
 	}
 
 	return PlaylistFactory;
