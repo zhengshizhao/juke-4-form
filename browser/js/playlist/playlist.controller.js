@@ -10,13 +10,16 @@ juke.controller('PlaylistCtrl', function ($scope, PlaylistFactory, $state, SongF
 		$scope.newPlaylist.name = name;
 		PlaylistFactory.create($scope.newPlaylist);
 		$state.go('playlist');
-		$scope.reset();
+		$scope.resetPL();
 	}
 
-	$scope.reset = function () {
+	$scope.resetPL = function () {
 		delete $scope.playlistName;
-		delete $scope.songChoices;
 		$scope.playlistForm.playlistName.$setPristine();
+	}
+
+	$scope.resetSG = function () {
+		delete $scope.chosenSong;
 	}
 
 	SongFactory.getAllSongs()
@@ -24,11 +27,9 @@ juke.controller('PlaylistCtrl', function ($scope, PlaylistFactory, $state, SongF
 		$scope.songs = data;
 	})
 
-	// $scope.addSong = PlaylistFactory.addSong;
-
 	$scope.addSong = function(chosenSong, playlistId) {
 		PlaylistFactory.addSong(chosenSong, playlistId);
-		$scope.reset();
+		$scope.resetSG();
 	}
 
 	PlaylistFactory.getSongList($scope.playlist._id)

@@ -4,6 +4,8 @@
    <select name="songChoices" ng-model="chosenSong" class="form-control" ng-options="song as song.name for song in songs"> </select>
    <br>
    <button ng-click="addSong(chosenSong, playlist._id)" type="submit" class="btn btn-success" ng-disabled="!chosenSong">Add song</button>
+   <br>
+   <br>
     <table class='table' ng-show="playlist.songs.length">
     <thead>
       <tr>
