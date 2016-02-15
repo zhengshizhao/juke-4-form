@@ -1,4 +1,4 @@
-juke.controller('PlaylistCtrl', function ($scope, PlaylistFactory) {
+juke.controller('PlaylistCtrl', function ($scope, PlaylistFactory,$state,SongFactory) {
 
 	$scope.newPlaylist = {
 		name: $scope.playlistName
@@ -7,6 +7,7 @@ juke.controller('PlaylistCtrl', function ($scope, PlaylistFactory) {
 	$scope.addPlaylist = function (name) {
 		$scope.newPlaylist.name = name;
 		PlaylistFactory.create($scope.newPlaylist);
+		$state.go('playlist');
 		$scope.reset();
 	}
 
@@ -14,8 +15,8 @@ juke.controller('PlaylistCtrl', function ($scope, PlaylistFactory) {
 		delete $scope.playlistName;
 		$scope.playlistForm.playlistName.$setPristine();
 	}
-
-
-
-
+	SongFactory.getAllSongs()
+	.then(function(data){
+		$scope.songs = data;
+	})
 });

@@ -18,7 +18,7 @@
     <script src="/js/artist/artist.factory.js" defer></script>
     <script src="/js/artist/artist.states.js" defer></script>
     <script src="/js/song/song.factory.js" defer></script>
-    <script src="/js/playlist/playlist.state.js" defer></script>
+    <script src="/js/playlist/playlist.states.js" defer></script>
     <script src="/js/playlist/playlist.controller.js" defer></script>
     <script src="/js/playlist/playlist.factory.js" defer></script>
   </head>
@@ -42,7 +42,7 @@
           <section>
             <h4 class="text-muted">PLAYLISTS</h4>
             <p class="playlist-item" ng-repeat="playlist in playlists">
-                <a>{{ playlist.name }}</a>
+                <a ui-sref="playlist({playlistId:playlist._id})">{{ playlist.name }}</a>
             </p>
 
             <p>
